@@ -11,6 +11,7 @@ namespace Singleton
 		private bool empty;
 		private bool boiled;
 		private static ChocolateBoilerF uniqueInstance;
+		private static readonly object InstanceLoker = new Object();
 
 		private ChocolateBoilerF()
 		{
@@ -22,10 +23,14 @@ namespace Singleton
 		{
 			if (uniqueInstance == null)
 			{
-				Console.WriteLine("Creating unique instance of Chocolate Boiler");
-				uniqueInstance = new ChocolateBoilerF();
+				lock (InstanceLoker)
+				{
+					if (uniqueInstance == null)
+						Console.WriteLine("Creacion de unica instancia de Chocolate Boiler");
+						uniqueInstance = new ChocolateBoilerF();
+				}
 			}
-			Console.WriteLine("Returning instance of Chocolate Boiler");
+			Console.WriteLine("Regresando la instancia de Chocolate Boiler");
 			return uniqueInstance;
 		}
 
@@ -35,7 +40,8 @@ namespace Singleton
 			{
 				empty = false;
 				boiled = false;
-				// fill the boiler with a milk/chocolate mixture
+				Console.WriteLine("Contenedor lleno");
+				//se llena el boiler con mezcla de leche con chocolate
 			}
 		}
 
@@ -43,8 +49,9 @@ namespace Singleton
 		{
 			if (!isEmpty() && isBoiled())
 			{
-				// drain the boiled milk and chocolate
+				// se vacia  la leche y chocolate hervido
 				empty = true;
+				Console.WriteLine("Contenedor drenado");
 			}
 		}
 
@@ -54,6 +61,7 @@ namespace Singleton
 			{
 				// bring the contents to a boil
 				boiled = true;
+				Console.WriteLine("La mezcla está hirviendo");
 			}
 		}
 
