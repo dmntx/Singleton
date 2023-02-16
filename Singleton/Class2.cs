@@ -29,6 +29,7 @@ namespace Singleton
             if(!isEmpty() && isBoiled())
             {
                 empty = true;
+                Console.WriteLine("Contenedor drenado");
             }
         }
 

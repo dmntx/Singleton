@@ -12,11 +12,13 @@ namespace Singleton
         {
 
             ChocolateBoilerF boiler = ChocolateBoilerF.getInstance();
-            boiler.fill();
-            boiler.fill();
+            ChocolateBoilerF boiler2 = ChocolateBoilerF.getInstance();
+            /*boiler.fill();
+            boiler2.boil();
+            //boiler.drain();
             boiler.drain();
             boiler.boil();
-            boiler.drain();
+            boiler.drain();*/
             Console.ReadKey();
         }
     }
